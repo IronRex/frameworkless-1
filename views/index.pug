@@ -5,11 +5,11 @@ html
 	body
 		h1 List of Quotes
 		ul.list-of-quotes
-			each quote in quotes
+			each quote, index in quotes
 				include item.pug
 		span
 			input.add-quote-text(type="text")
-			button.add-quote-button Add Quote
+			button.add-quote-button +
 
 		style!=style
 		script!=script

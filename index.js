@@ -3,17 +3,14 @@ const fs = require('fs');
 const util = require('util');
 
 const express = require('express');
-const pug = require('pug');
 
 async function main() {
 	const script = fs.readFileSync('./scripts/index.js').toString('utf8');
 	const style = fs.readFileSync('./styles/index.css').toString('utf8');
 
-	const listItemView = pug.compileFile('./views/item.pug');
-
 	const dataFileName = './data/quotes.json';
 
-	const quotes = JSON.parse(fs.readFileSync(dataFileName));
+	let quotes = JSON.parse(fs.readFileSync(dataFileName));
 
 	const app = express();
 
@@ -32,9 +29,16 @@ async function main() {
 	});
 
 	app.get('/add', (req, res) => {
-		quotes.push(req.query.quote);
-		res.send(JSON.stringify(listItemView({ quote: req.query.quote })));
+		const quote = req.query.quote;
+		res.render('item', { quote: quote });
 		fs.writeFileSync(dataFileName, JSON.stringify(quotes));
+	});
+
+	app.get('/remove', (req, res) => {
+		const quote = req.query.quote;
+		quotes = quotes.filter(it => it !== quote);
+		fs.writeFileSync(dataFileName, JSON.stringify(quotes));
+		res.send('OK');
 	});
 
 	const port = process.env.PORT || 8080;
