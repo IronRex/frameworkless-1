@@ -4,9 +4,12 @@ html
 		title List of Quotes
 	body
 		h1 List of Quotes
-		ul
+		ul.list-of-quotes
 			each quote in quotes
-				li=quote
+				include item.pug
+		span
+			input.add-quote-text(type="text")
+			button.add-quote-button Add Quote
 
 		style!=style
 		script!=script
