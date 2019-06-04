@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const util = require('util');
+const fetch = require('node-fetch');
 
 const express = require('express');
 
@@ -31,6 +31,7 @@ async function main() {
 	app.get('/add', (req, res) => {
 		const quote = req.query.quote;
 		res.render('item', { quote: quote });
+		quotes.push(quote);
 		fs.writeFileSync(dataFileName, JSON.stringify(quotes));
 	});
 
@@ -39,6 +40,12 @@ async function main() {
 		quotes = quotes.filter(it => it !== quote);
 		fs.writeFileSync(dataFileName, JSON.stringify(quotes));
 		res.send('OK');
+	});
+
+	app.get('/fetch', (req, res) => {
+		fetch('https://favqs.com/api/qotd')
+			.then(res => res.json())
+			.then(json => res.send(json.quote.body));
 	});
 
 	const port = process.env.PORT || 8080;

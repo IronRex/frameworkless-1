@@ -1,3 +1,7 @@
-h1 {
+.title {
 	color: green;
+}
+
+.add-quote-text {
+	width: 100%;
 }

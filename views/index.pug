@@ -3,13 +3,14 @@ html
 	head
 		title List of Quotes
 	body
-		h1 List of Quotes
+		h1.title List of Quotes
 		ul.list-of-quotes
 			each quote, index in quotes
 				include item.pug
-		span
-			input.add-quote-text(type="text")
+		div
+			textarea.add-quote-text(type="text")
 			button.add-quote-button +
+			button.random-quote-button *
 
 		style!=style
 		script!=script
