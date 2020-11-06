@@ -4,7 +4,7 @@ A web application demostrating what can be achieved in a short time without use 
 
 ## Usage
 
-* Clone: `git clone git@github.forbes.com:ashnayderman/frameworkless-1.git`
+* Clone: `git clone git@github.com:IronRex/frameworkless-1.git`
 * Build: `npm install`
 * Run: `npm start`
 
